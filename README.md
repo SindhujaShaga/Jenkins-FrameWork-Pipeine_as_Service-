@@ -24,7 +24,25 @@ Configuration Steps
 
 * Assign basic 
 
->Overall/Read permission to these roles so that users can log in and see the Jenkins UI. 
+>Overall/Read permission to these roles so that users can log in and see the Jenkins UI.
+
+ 2.Create Item Roles:
+ * Create an "item role" for each tenant to control access to specific jobs and folders.
+ * Define a unique 
+
+>Pattern for each item role, such as tenant1.*. This pattern means the role will apply to any job or folder that starts with the prefix "tenant1".
+* Assign necessary permissions to this role, such as Job (Build, Create, Configure, Read) and Run (Update, Delete).
+* It is recommended to use the Folders plugin and apply the pattern to a folder to eliminate the need for jobs to follow a specific prefix naming convention. 
+
+3.Assign Roles to Users:
+* Navigate to the
+>Assign Roles section.
+* Assign each user their corresponding global role (e.g.,
+>user1 gets the tenant1 global role).
+* Assign each user their corresponding item role (e.g.,
+>user1 gets the tenant1 item role). This ensures the user can only access jobs and folders that match the pattern defined in the item role. 
+
+
 
 
 
