@@ -40,7 +40,69 @@ Configuration Steps
 * Assign each user their corresponding global role (e.g.,
 >user1 gets the tenant1 global role).
 * Assign each user their corresponding item role (e.g.,
->user1 gets the tenant1 item role). This ensures the user can only access jobs and folders that match the pattern defined in the item role. 
+>user1 gets the tenant1 item role). This ensures the user can only access jobs and folders that match the pattern defined in the item role.
+
+
+*Part 2: SonarQube Multi-Tenancy Setup*
+
+   Multi-tenancy in SonarQube is achieved by creating private projects and using groups to control which users can view and analyze them.
+
+   Configuration Steps
+   1.Create Users and Groups:
+* From the 
+> Administration tab, create a new user for each tenant (e.g., user3).
+*Create a new group with a corresponding name (e.g., 
+>usergrp3).
+*Add the newly created user to their respective group.
+
+3.Create and Secure a Project:
+
+*Create a new project for the tenant (e.g., 
+
+>DemoProject3). 
+
+
+* Navigate to the project's 
+
+>Project Settings > Permissions. 
+
+* Set the project's visibility from Public to Private. This ensures that only authorized users or groups can see the project.
+
+3.Grant Project Permissions:
+
+* On the same Permissions page, grant the necessary permissions (e.g., Browse, See Source Code, Execute Analysis) to the tenant's group (usergrp3). 
+
+* Revoke permissions from any other general groups like "Anyone" or "sonar-users".
+
+*Part 3: Connecting Jenkins to a Secure SonarQube Project
+This final step integrates the two systems, allowing a tenant's Jenkins pipeline to send analysis data to their private, isolated SonarQube project.*
+
+After these steps, when a tenant user logs into SonarQube, they will only be able to see and access the projects for which their group has been granted permissions, successfully achieving multi-tenancy. 
+
+*Configuration Steps*
+
+1.Generate a SonarQube Token:
+
+* In SonarQube, navigate to the tenant's private project.
+
+* Generate a new secret authentication token for the project.  This token will be used by Jenkins to authenticate.
+
+2.Configure the Jenkins Pipeline:
+
+* Create a pipeline job in Jenkins. 
+
+* In the pipeline script, configure the SonarQube scanner step (mvn sonar:sonar). 
+
+* Update the command with the correct SonarQube Project Key and the Authentication Token generated in the previous step. 
+
+Once the pipeline is built, the analysis results will be sent directly to the specified SonarQube project. Because the project is private, the report will only be visible to the tenant user (user3) who has been granted permission, completing the secure, multi-tenant workflow. 
+
+
+
+
+
+
+
 
 
 
