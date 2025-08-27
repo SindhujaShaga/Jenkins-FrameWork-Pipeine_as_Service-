@@ -86,3 +86,9 @@ This final step integrates the two systems, allowing a tenant's Jenkins pipeline
         ```
 
 Once the pipeline is built, the analysis results will be sent directly to the specified SonarQube project. Because the project is **private**, the report will only be visible to the tenant user (`user3`) who has been granted permission, completing the secure, multi-tenant workflow! 🎉
+
+## Author
+**Sindhuja Shaga** — *DevOps Engineer / CI/CD Enthusiast*  
+[LinkedIn](https://www.linkedin.com/in/sindhuja-shaga/) | [GitHub](https://github.com/SindhujaShaga?tab=repositories) 
+
+---
